@@ -13,7 +13,7 @@ class TacheController extends Controller
      */
     public function index()
     {
-        return view("edit", ['tasks' => Task::all()]);
+        return view("index", ['tasks' => Task::all()]);
     }
 
     /**

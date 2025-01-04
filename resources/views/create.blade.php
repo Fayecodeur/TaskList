@@ -8,14 +8,14 @@
             <!-- Formulaire centré avec une largeur max -->
             <div class="col-md-6">
                 <div class="shadow-lg rounded p-4 bg-white">
-                    <form action="{{ isset($task)? route('update', $task->id): route('create') }}" method="POST">
+                    <form action="{{ isset($task)? route('task.update', $task->id): route('task.store') }}" method="POST">
                         @if(isset($task))
                             @method("PUT")
                         @endif
                         <!-- Section titre et bouton "Retour" -->
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <h3> {{isset($task)? 'Modifier une tache' : 'Ajouter une Tâche' }} </h3>
-                            <a href="{{ route('index') }}" class="btn btn-outline-primary">Retour</a>
+                            <a href="{{ route('task.index') }}" class="btn btn-outline-primary">Retour</a>
                         </div>
 
                         @csrf
