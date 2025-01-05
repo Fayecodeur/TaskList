@@ -3,7 +3,16 @@
 @section('title', 'Liste des Tâches')
 
 @section('content')
-<div class="container mt-5">
+<div class="container mt-3">
+    @if (session('success'))
+    <div class="alert alert-success d-flex align-items-center mb-3" role="alert">
+        <i class="bi bi-check-circle-fill me-2" style="font-size: 1.5rem;"></i>
+        <div>
+            {{ session('success') }}
+        </div>
+    </div>
+    @endif
+
     <div class="shadow-lg rounded p-4 bg-white">
         <div class="d-flex justify-content-between mb-3">
             <h5>Liste des Tâches</h5>
@@ -22,35 +31,32 @@
                     </tr>
                 </thead>
                 <tbody>
-                @foreach( $tasks as $task )
+                @foreach($tasks as $task)
                     <tr>
-                        <td>{{$task->title}}</td>
-                        <td>{{$task->description}}</td>
+                        <td>{{ $task->title }}</td>
+                        <td>{{ $task->description }}</td>
                         <td>
-                            @if($task->status == 1 )
-                            <span class="badge text-bg-success">Terminé</span>
+                            @if($task->status == 1)
+                                <span class="badge text-bg-success">Terminé</span>
                             @else
                                 <span class="badge text-bg-warning">En cours</span>
                             @endif
                         </td>
                         <td>
-                            <a href="{{route('task.edit', $task->id)}}" class="btn btn-info btn-sm">
+                            <a href="{{ route('task.edit', $task->id) }}" class="btn btn-info btn-sm">
                                 <i class="bi bi-pencil"></i>
                             </a>
 
-
-                                <form action="{{route('task.destroy', $task->id)}}" method="POST" style="display: inline-block">
-                                    @csrf
-                                    @method("DELETE")
-                                    <button  onclick="return confirm('Etes vous sur de supprimer cette tache')" class="btn btn-danger btn-sm">
-                                        <i class="bi bi-trash"></i>
-                                    </button>
-                                </form>
-
+                            <form action="{{ route('task.destroy', $task->id) }}" method="POST" style="display: inline-block">
+                                @csrf
+                                @method("DELETE")
+                                <button onclick="return confirm('Etes vous sur de supprimer cette tâche ?')" class="btn btn-danger btn-sm">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                            </form>
                         </td>
                     </tr>
                 @endforeach
-                    <!-- Ajoute ici d'autres tâches si nécessaire -->
                 </tbody>
             </table>
         </div>
