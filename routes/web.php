@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TacheController;
 // use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [TacheController::class, 'index'])->name('index');
+Route::get('/login', [AuthController::class, 'index'])->name('login.index');
 
 Route::resource('/task', TacheController::class);
 
