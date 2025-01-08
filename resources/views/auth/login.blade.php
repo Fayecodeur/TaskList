@@ -13,7 +13,7 @@
             </div>
         @endif
         <h3 class="mb-4 text-center">Connexion</h3>
-        <form method="POST" class="py-4" action="{{ route('login') }}">
+        <form method="POST" class="py-4" action="{{ route('login.post') }}">
             @csrf
             <!-- Champ Email -->
             <div class="mb-4">
