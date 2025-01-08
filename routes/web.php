@@ -5,11 +5,19 @@ use App\Http\Controllers\TacheController;
 // use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [TacheController::class, 'index'])->name('index');
-Route::resource('/task', TacheController::class);
+// Routes protégées par le middleware 'auth'
+Route::middleware('auth')->group(function () {
+    Route::get('/', [TacheController::class, 'index'])->name('index');
+    Route::resource('/task', TacheController::class);
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
+});
 
-Route::get('/login', [AuthController::class, 'index'])->name('login.index');
-Route::post('/login', [AuthController::class, 'login'])->name('login');
+// Routes accessibles uniquement aux invités
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [AuthController::class, 'index'])->name('login');
+    Route::post('/login', [AuthController::class, 'login'])->name('login.post');
+});
+
 
 
 
