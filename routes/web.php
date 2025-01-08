@@ -6,9 +6,11 @@ use App\Http\Controllers\TacheController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [TacheController::class, 'index'])->name('index');
-Route::get('/login', [AuthController::class, 'index'])->name('login.index');
-
 Route::resource('/task', TacheController::class);
+
+Route::get('/login', [AuthController::class, 'index'])->name('login.index');
+Route::post('/login', [AuthController::class, 'login'])->name('login');
+
 
 
 // Route::get('/task/create', [TaskController::class, 'create'])->name('create');
