@@ -14,9 +14,10 @@
     @endif
 
     <div class="shadow-lg rounded p-4 bg-white">
-        <div class="d-flex justify-content-between mb-3">
-            <h5>Liste des Tâches</h5>
-            <a href="{{ route('task.create') }}" class="btn btn-outline-primary btn-sm align-item-center">Ajouter une Tâche</a>
+        <div class="d-flex mb-3">
+            <h5 class="me-3">Liste des Tâches</h5>
+            <a href="{{ route('task.create') }}" class="btn btn-outline-primary btn-sm align-item-center me-3">Ajouter une Tâche</a>
+            <a href="{{ route('logout') }}" class="btn btn-outline-danger btn-sm align-item-center ms-3">Déconnexion</a>
         </div>
 
         <!-- Tableau des tâches -->
