@@ -22,18 +22,22 @@ class AuthController extends Controller
 
     public function login(LoginRequest $request)
     {
-        $credentials = $request->only('email', 'password');
-
-        // Vérifier les données envoyées
-        // dd($credentials);
-
+        $credentials = $request->validated();
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             return redirect()->route('index');
         }
 
-        return back()->with([
-            "error" => "Identifiant incorrect"
+        return back()->withInput()->with([
+            "error" => "Identifiants incorrects"
         ]);
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('index');
     }
 }
